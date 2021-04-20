@@ -3,7 +3,18 @@ import axios from 'axios';
 
 const Search = ({props}) => {
     const [term, setTerm] = useState('programming');
+    const [debouncedTerm, setDebouncedTerm] = useState('programming');
     const [results, setResults] = useState([]);
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setDebouncedTerm(term);
+        }, 500);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, [term]);
 
     useEffect(() => {
         const searchWiki = async () => {
@@ -13,30 +24,14 @@ const Search = ({props}) => {
                     list: 'search',
                     origin: '*',
                     format: 'json',
-                    srsearch: term
+                    srsearch: debouncedTerm
                 }
             })
             setResults(data.query.search);
         };
-        
-        if (term && !results.length){
-            searchWiki();
-        } else {
-            const timeoutId = setTimeout(() => {
-                if (term) {
-                    searchWiki();
-                }
-            }, 500);
-    
-            return () => {
-                clearTimeout(timeoutId);
-            }
-        }
-    
- 
-        
-        
-    }, [term]);
+
+        searchWiki();
+    }, [debouncedTerm]);
 
     const onFormChange = (event) => {
         setTerm(event);
