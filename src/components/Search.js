@@ -29,7 +29,6 @@ const Search = ({props}) => {
             })
             setResults(data.query.search);
         };
-
         searchWiki();
     }, [debouncedTerm]);
 
