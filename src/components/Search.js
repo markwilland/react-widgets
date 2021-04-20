@@ -7,6 +7,7 @@ const Search = ({props}) => {
 
 
     console.log(results);
+    
     useEffect(() => {
         const searchWiki = async () => {
             const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
