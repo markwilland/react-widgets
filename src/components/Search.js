@@ -16,13 +16,27 @@ const Search = ({props}) => {
                     srsearch: term
                 }
             })
-
             setResults(data.query.search);
         };
-
-        searchWiki();
+        
+        if (term && !results.length){
+            searchWiki();
+        } else {
+            const timeoutId = setTimeout(() => {
+                if (term) {
+                    searchWiki();
+                }
+            }, 500);
+    
+            return () => {
+                clearTimeout(timeoutId);
+            }
+        }
+    
+ 
+        
+        
     }, [term]);
-
 
     const onFormChange = (event) => {
         setTerm(event);
