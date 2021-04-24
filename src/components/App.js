@@ -38,6 +38,7 @@ const options = [
 ];
 
 export default () => {
+    const [selected, setSelected] = useState(options[0]);
 
     return (
         <div>
@@ -50,8 +51,12 @@ export default () => {
                 <Search  />
             </Route>
 
-            <Route path="/">
-                <Accordion items={items} />
+            <Route path="/translate">
+                <Translate />
+            </Route>
+
+            <Route path="/dropdown">
+                <Dropdown label="select a color" options={options} selected={selected} onSelectedChange={setSelected} />
             </Route>
         
         </div>
