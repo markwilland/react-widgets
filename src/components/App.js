@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
 import Accordion from './Accordion';
 import Search from './Search';
 import Dropdown from './Dropdown';
 import Translate from './Translate';
 import Route from './Route';
+import Header from './Header';
 
 const items = [
     {
@@ -19,8 +21,6 @@ const items = [
         content: 'You use react by creating components'
     }
 ];
-
-
 
 const options = [
     {
@@ -42,7 +42,7 @@ export default () => {
 
     return (
         <div>
-            
+            <Header />
             <Route path="/">
                 <Accordion items={items} />
             </Route>
